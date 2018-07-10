@@ -1,0 +1,48 @@
+尽管可以声明 enum 类型的变量, 但编译器不检查这种类
+型的变量中存储的值是否为该枚举的有效值。不过,枚举变量提供这种检查
+
+例如：
+typedef enum months
+  {
+    JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV,DEC
+  }months;
+
+//months为枚举类型的变量
+//JAN,FEB等为枚举有效值
+
+#define Test "test"
+/* 或 #define Test "4564"  */
+
+months m;
+//m为枚举变量
+
+int main()
+{
+  m = (months)Test; //不检查
+  m = Test;//检查
+}
+
+
+其中m = Test;会报错
+
+
+
+
+如果直接赋一个整形的数据给枚举变量，现在的编译器是不会报错的。
+但这样的后果也就会导致我们可能得到了一个没有实际意义的结果。因为枚举本身就是为了方便阅读程序。
+复制代码
+
+#include <stdio.h>
+enum COLOR{red=1,green,blue};
+void fun(enum COLOR color)
+{
+    printf("%d\n",color);
+}
+int main()
+{
+    enum COLOR color=red;
+    enum COLOR color2=0;
+    fun(color);
+    fun(color2);
+    return 0;
+}
