@@ -1,0 +1,35 @@
+
+#if 语句对其中的常量整型表达式(其中不能包含 sizeof、类型转换运算符或 enum 常
+量)进行求值,若该表达式的值不等于 0,则包含其后的各行,直到遇到#endif、#elif 或
+#else 语句为止(预处理器语句#elif 类似于 else if)。
+
+在#if 语句中可以使用表达式defined(名字),该表达式的值遵循下列规则:
+当名字已经定义时,其值为 1;否则,其值为 0。
+
+例如,为了保证 hdr.h 文件的内容只被包含一次,可以将该文件的内容包含在下列形式
+的条件语句中:
+#if !defined(HDR)
+#define HDR
+/* hdr.h 文件的内容放在这里 */
+#endif
+
+下面的这段预处理代码首先测试系统变量 SYSTEM, 然后根据该变量的值确定包含哪个版
+本的头文件:
+#if SYSTEM == SYSV
+#define HDR "sysv.h"
+#elif SYSTEM == BSD
+#define HDR "bsd.h"
+#elif SYSTEM == MSDOS
+#define HDR "msdos.h"
+#else
+#define HDR "default.h"
+#endif
+#include HDR
+
+C 语言专门定义了两个预处理语句#ifdef 与#ifndef, 它们用来测试某个名字是否已经
+定义。上面有关#if 的第一个例子可以改写为下列形式:
+#ifndef HDR
+#define EDR
+/* hdr.h 文件的内容放在这里 */
+#endif
+
