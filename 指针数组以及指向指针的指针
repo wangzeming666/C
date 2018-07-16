@@ -1,0 +1,5 @@
+指针数组 1ineptr 的声明是新出现的重要概念:
+char *lineptr[MAXLINES];
+它表示 1ineptr 是一个具有 MAXLINES 个元素的一维数组,其中数组的每个元素是一个指
+向字符类型对象的指针。
+
