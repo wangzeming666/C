@@ -1,0 +1,16 @@
+指针数组的初始化语法和前面所讲的其它类型对象的初始化语法类似:
+/* month_name: return name of n-th month */
+char *month_name(int n)
+{
+static char *name[] = {
+"Illegal month",
+"January", "February", "March",
+"April", "May", "June",
+"July", "August", "September",
+"October", "November", "December"
+};
+其中,name 的声明与排序例子中 lineptr 的声明相同,是一个一维数组,数组的元素为字
+符指针。name 数组的初始化通过一个字符串列表实现,列表中的每个字符串赋值给数组相应
+位置的元素。第 i 个字符串的所有字符存储在存储器中的某个位置,指向它的指针存储在
+name[i]中。由于上述声明中没有指明 name 的长度,因此,编译器编译时将对初值个数进
+行统计,并将这一准确数字填入数组的长度。
