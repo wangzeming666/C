@@ -1,0 +1,59 @@
+记得最初学C++的时候，这个概念就卡了我两天。
+后来学C的时候没遇到这个概念。
+刚才在书里面看到这个的时候，没想到是指针的指针，又再一次卡了我近两个小时。
+emmmm
+这种事，不该有下一次了。
+
+取函数和数组的地址时，前面不需要加 & 运算符。
+
+(void **)&a是什么意思？为什么有两个*？
+将变量a的地址强制为void **型指针，即认为a是个指针变量，并取这个指针变量的地址，且将这个地址强制为忽略原有类型只有地址值的指针。
+**是指针的指针的意思。
+
+(void **)lineptr
+这句代码中lineptr是一个数组，取数组的地址不需要加&，将数组的地址强制转换为忽略原有类型值只有地址值的指针
+
+任何类型的指针都可以转换为 void
+*类型,并且在将它转换回原来的类型时不会丢失信息
+
+/* qsort: sort v[left]...v[right] into increasing order */
+void qsort(void *v[], int left, int right,
+int (*comp)(void *, void *))
+{
+int i, last;
+void swap(void *v[], int, int);
+if (left >= right)
+/* do nothing if array contains */
+return;
+/* fewer than two elements */
+swap(v, left, (left + right)/2);
+last = left;
+for (i = left+1; i <= right; i++)
+if ((*comp)(v[i], v[left]) < 0)
+swap(v, ++last, i);
+swap(v, left, last);
+qsort(v, left, last-1, comp);
+qsort(v, last+1, right, comp);
+}
+
+qsort 函数的第四个参数声明如下:
+int (*comp)(void *, void *)
+它表明 comp 是一个指向函数的指针,该函数具有两个 void *类型的参数,其返回值类型为
+int。
+在下列语句中:
+if ((*comp)(v[i], v[left]) < 0)
+comp 的使用和其声明是一致的,comp 是一个指向函数的指针,*comp 代表一个函数。下列
+语句是对该函数进行调用:
+(*comp)(v[i], v[left])
+其中的圆括号是必须的,这样才能够保证其中的各个部分正确结合。如果没有括号,例如写
+成下面的形式:
+int *comp(void *, void *)
+/* WRONG */
+则表明 comp 是一个函数,该函数返回一个指向 int 类型的指针,这同我们的本意显然有很
+大的差别。
+
+
+void**            --  VOID指针的指针类型
+（void **）  --  强制转换为VOID指针的指针类型
+int(*)(void * ,void *)     --  函数指针， 函数类型为：   int  FUNC(void * ,void *)
+(int(*)(void * ,void *))   --  强制转换为函数指针
