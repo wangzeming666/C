@@ -82,6 +82,7 @@ char *string ;
 double 8字节。
 
 
+char** argv与char *argv[]区别：
 char *a: a的值包含字符型数据，取消对a的引用（*a)得到一个字符，
   不取消引用得到一个字符串，printf("%c",*a)输出一个字符或者printf("%s",a)输出字符串;
 char **a: a的值包含一个地址，该地址包含字符字符型数据，取消对a的引用（*a），得到该地址，
