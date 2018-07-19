@@ -1,0 +1,26 @@
+下面的声明:
+struct key {
+  char *word;
+  int count;
+} keytab[NKEYS];
+
+它声明了一个结构类型 key,并定义了该类型的结构数组 keytab,同时为其分配存储空间。
+数组 keytab 的每个元素都是一个结构。上述声明也可以写成下列形式:
+struct key {
+  char *word;
+  int count;
+};
+
+struct key keytab[NKEYS];
+
+C 语言提供了一个编译时(compile-time)一元运算符 sizeof,它可用来计算任一对象的长
+度。表达式
+sizeof 对象
+以及
+sizeof(类型名)
+将返回一个整型值,它等于指定对象或类型占用的存储空间字节数。
+(严格地说,sizeof 的
+返回值是无符号整型值,其类型为 size_t,该类型在头文件<stddef.h>中定义。
+)其中,
+对象可以是变量、数组或结构;类型可以是基本类型,如 int、double,也可以是派生类型,
+如结构类型或指针类型。
